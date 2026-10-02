@@ -27,7 +27,7 @@ cp -p policies/*.pp %{buildroot}/usr/local/share/fedora-selinux-extra-policies
 # Remove modules only on complete uninstallation ($1 == 0)
 if [ $1 -eq 0 ]
 then
-    for pp in /usr/local/share/fedora-selinux-extra-policies*.pp
+    for pp in /usr/local/share/fedora-selinux-extra-policies/*.pp
     do
         if [ -f "$pp" ]
         then
@@ -39,9 +39,9 @@ fi
 
 %posttrans
 # Automatically install/update modules at the end of transaction
-for pp in /usr/local/share/fedora-selinux-extra-policies*.pp
+for pp in /usr/local/share/fedora-selinux-extra-policies/*.pp
 do
-    [ -f "$pp" ] && semodule -i "$pp" && echo "[+] Installed policy: $(basename $pp)
+    [ -f "$pp" ] && semodule -i "$pp" && echo "[+] Installed policy: $(basename "$pp")"
 done
 
 %files

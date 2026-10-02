@@ -1,0 +1,35 @@
+name: Fedora Builder
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-rpm:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare build environment
+        run: dnf group install -y rpm-development-tools
+
+      - name: Build RPM Package
+        run: |
+          chmod +x -v scripts/build-rpm.sh
+          ./scripts/build-rpm.sh
+          mkdir -p dist
+          cp ~/rpmbuild/RPMS/noarch/*.rpm dist/
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.rpm
+          fail_on_unmatched_files: true
