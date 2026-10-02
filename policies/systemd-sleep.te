@@ -1,0 +1,13 @@
+
+module systemd-sleep 1.0;
+
+require {
+	type systemd_sleep_t;
+	type tmpfs_t;
+	class file { read write };
+}
+
+#============= systemd_sleep_t ==============
+
+#!!!! This avc is allowed in the current policy
+allow systemd_sleep_t tmpfs_t:file { read write };
