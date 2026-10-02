@@ -1,0 +1,16 @@
+
+module snap 1.0;
+
+require {
+	type snappy_mount_t;
+	type usr_t;
+	type snappy_t;
+	class file { create rename setattr write };
+	class capability dac_override;
+}
+
+#============= snappy_mount_t ==============
+allow snappy_mount_t self:capability dac_override;
+
+#============= snappy_t ==============
+allow snappy_t usr_t:file { create rename setattr write };

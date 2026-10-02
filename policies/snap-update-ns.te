@@ -1,0 +1,98 @@
+
+module snap-update-ns 1.0;
+
+require {
+	type avahi_conf_t;
+	type virt_etc_t;
+	type samba_etc_t;
+	type passwd_file_t;
+	type modules_conf_t;
+	type etc_aliases_t;
+	type net_conf_t;
+	type syslog_conf_t;
+	type NetworkManager_etc_t;
+	type system_cron_spool_t;
+	type pppd_etc_t;
+	type dhcp_etc_t;
+	type ipsec_key_file_t;
+	type mcelog_etc_t;
+	type tuned_etc_t;
+	type firewalld_etc_rw_t;
+	type lvm_etc_t;
+	type named_conf_t;
+	type exports_t;
+	type krb5_conf_t;
+	type shadow_t;
+	type bluetooth_conf_t;
+	type dnsmasq_etc_t;
+	type mysqld_etc_t;
+	type dbusd_etc_t;
+	type rsync_etc_t;
+	type sssd_conf_t;
+	type abrt_etc_t;
+	type hostname_etc_t;
+	type vmtools_unconfined_exec_t;
+	type cert_t;
+	type adjtime_t;
+	type mdevctl_conf_t;
+	type openvpn_etc_t;
+	type cupsd_rw_etc_t;
+	type snappy_mount_t;
+	type ipsec_conf_file_t;
+	type cupsd_etc_t;
+	type auditd_etc_t;
+	class capability dac_override;
+	class lnk_file read;
+	class file getattr;
+	class dir getattr;
+}
+
+#============= snappy_mount_t ==============
+allow snappy_mount_t NetworkManager_etc_t:dir getattr;
+allow snappy_mount_t abrt_etc_t:dir getattr;
+allow snappy_mount_t adjtime_t:file getattr;
+allow snappy_mount_t auditd_etc_t:dir getattr;
+allow snappy_mount_t avahi_conf_t:dir getattr;
+allow snappy_mount_t bluetooth_conf_t:dir getattr;
+allow snappy_mount_t cert_t:dir getattr;
+allow snappy_mount_t cupsd_etc_t:dir getattr;
+allow snappy_mount_t cupsd_rw_etc_t:file getattr;
+allow snappy_mount_t dbusd_etc_t:dir getattr;
+allow snappy_mount_t dhcp_etc_t:dir getattr;
+allow snappy_mount_t dnsmasq_etc_t:dir getattr;
+allow snappy_mount_t dnsmasq_etc_t:file getattr;
+allow snappy_mount_t etc_aliases_t:file getattr;
+allow snappy_mount_t exports_t:dir getattr;
+allow snappy_mount_t exports_t:file getattr;
+allow snappy_mount_t firewalld_etc_rw_t:dir getattr;
+allow snappy_mount_t hostname_etc_t:file getattr;
+allow snappy_mount_t ipsec_conf_file_t:file getattr;
+allow snappy_mount_t ipsec_key_file_t:dir getattr;
+allow snappy_mount_t ipsec_key_file_t:file getattr;
+allow snappy_mount_t krb5_conf_t:file getattr;
+allow snappy_mount_t lvm_etc_t:dir getattr;
+allow snappy_mount_t mcelog_etc_t:dir getattr;
+allow snappy_mount_t mdevctl_conf_t:dir getattr;
+allow snappy_mount_t modules_conf_t:dir getattr;
+allow snappy_mount_t mysqld_etc_t:dir getattr;
+allow snappy_mount_t mysqld_etc_t:file getattr;
+allow snappy_mount_t named_conf_t:dir getattr;
+allow snappy_mount_t net_conf_t:file getattr;
+allow snappy_mount_t net_conf_t:lnk_file read;
+allow snappy_mount_t openvpn_etc_t:dir getattr;
+allow snappy_mount_t passwd_file_t:file getattr;
+allow snappy_mount_t pppd_etc_t:dir getattr;
+allow snappy_mount_t rsync_etc_t:file getattr;
+allow snappy_mount_t samba_etc_t:dir getattr;
+
+#!!!! This avc is allowed in the current policy
+allow snappy_mount_t self:capability dac_override;
+allow snappy_mount_t shadow_t:file getattr;
+allow snappy_mount_t sssd_conf_t:dir getattr;
+allow snappy_mount_t syslog_conf_t:dir getattr;
+allow snappy_mount_t syslog_conf_t:file getattr;
+allow snappy_mount_t system_cron_spool_t:dir getattr;
+allow snappy_mount_t system_cron_spool_t:file getattr;
+allow snappy_mount_t tuned_etc_t:dir getattr;
+allow snappy_mount_t virt_etc_t:dir getattr;
+allow snappy_mount_t vmtools_unconfined_exec_t:dir getattr;

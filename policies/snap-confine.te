@@ -1,0 +1,22 @@
+
+module snap-confine 1.0;
+
+require {
+	type var_t;
+	type tmpfs_t;
+	type crack_db_t;
+	type var_lib_t;
+	type snappy_confine_t;
+	class dir { read search };
+	class lnk_file unlink;
+	class filesystem remount;
+	class file getattr;
+}
+
+#============= snappy_confine_t ==============
+allow snappy_confine_t crack_db_t:dir search;
+allow snappy_confine_t crack_db_t:file getattr;
+allow snappy_confine_t tmpfs_t:filesystem remount;
+allow snappy_confine_t tmpfs_t:lnk_file unlink;
+allow snappy_confine_t var_lib_t:dir read;
+allow snappy_confine_t var_t:dir read;
