@@ -11,7 +11,7 @@ Requires:       policycoreutils
 Requires:       selinux-policy-base
 
 %description
-A collection of custom local SELinux policy modules (.pp) for system fixes.
+A collection of custom SELinux policies to fix hardware and software issues.
 
 %prep
 %autosetup -c
@@ -20,14 +20,17 @@ A collection of custom local SELinux policy modules (.pp) for system fixes.
 # Policies are pre-compiled .pp files
 
 %install
-mkdir -p %{buildroot}/usr/share/selinux/packages
-cp -p policies/*.pp %{buildroot}/usr/share/selinux/packages/
+mkdir -p %{buildroot}/usr/local/share/fedora-selinux-extra-policies
+cp -p policies/*.pp %{buildroot}/usr/local/share/fedora-selinux-extra-policies
 
 %preun
 # Remove modules only on complete uninstallation ($1 == 0)
-if [ $1 -eq 0 ]; then
-    for pp in /usr/share/selinux/packages/*.pp; do
-        if [ -f "$pp" ]; then
+if [ $1 -eq 0 ]
+then
+    for pp in /usr/local/share/fedora-selinux-extra-policies*.pp
+    do
+        if [ -f "$pp" ]
+        then
             modname=$(basename "$pp" .pp)
             semodule -r "$modname" || true
         fi
@@ -36,9 +39,10 @@ fi
 
 %posttrans
 # Automatically install/update modules at the end of transaction
-for pp in /usr/share/selinux/packages/*.pp; do
-    [ -f "$pp" ] && semodule -i "$pp"
+for pp in /usr/local/share/fedora-selinux-extra-policies*.pp
+do
+    [ -f "$pp" ] && semodule -i "$pp" && echo "[+] Installed policy: $(basename $pp)
 done
 
 %files
-/usr/share/selinux/packages/*.pp
+/usr/local/share/fedora-selinux-extra-policies/*.pp
