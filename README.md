@@ -11,7 +11,7 @@ This package is meant for systems that are running with SELinux in enforcing mod
 - Snap and snapd access problems
 - tmpfs and mount-related denials
 - temporary system sleep/resume file access issues
-- virtualization helper access to FUSE-backed filesystems
+- virtualization helper access to FUSE-backed filesystems, user home directories and X server files required by QEMU/libvirt
 
 The result is that the affected software can work normally instead of being stopped by SELinux policy restrictions.
 
