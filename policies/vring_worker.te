@@ -1,0 +1,13 @@
+
+module vring_worker 1.0;
+
+require {
+	type fusefs_t;
+	type virtqemud_t;
+	class filesystem getattr;
+}
+
+#============= virtqemud_t ==============
+
+#!!!! This avc can be allowed using the boolean 'virt_use_fusefs'
+allow virtqemud_t fusefs_t:filesystem getattr;
