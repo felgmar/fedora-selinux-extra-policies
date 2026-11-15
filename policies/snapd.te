@@ -1,13 +1,14 @@
 
-module snapd 1.0;
+module snapd 1.1;
 
 require {
-	type usr_t;
 	type snappy_t;
-	class file { create rename setattr write };
+	type usr_t;
+	class file { create rename setattr unlink write };
 }
 
 #============= snappy_t ==============
 
 #!!!! This avc is allowed in the current policy
 allow snappy_t usr_t:file { create rename setattr write };
+allow snappy_t usr_t:file unlink;
