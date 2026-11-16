@@ -1,0 +1,13 @@
+
+module rpc-virtstorage 1.0;
+
+require {
+	type virtstoraged_t;
+	type unlabeled_t;
+	class dir { add_name write };
+	class file { create write };
+}
+
+#============= virtstoraged_t ==============
+allow virtstoraged_t unlabeled_t:dir { add_name write };
+allow virtstoraged_t unlabeled_t:file { create write };
