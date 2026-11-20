@@ -1,14 +1,17 @@
 
-module qemu-system-x86 1.0;
+module qemu-system-x86 1.1;
 
 require {
 	type svirt_t;
 	type user_home_t;
 	type xserver_exec_t;
+	type virt_image_t;
 	class file getattr;
+	class file write;
 	class dir read;
 }
 
 #============= svirt_t ==============
 allow svirt_t user_home_t:dir read;
 allow svirt_t xserver_exec_t:file getattr;
+allow svirt_t virt_image_t:file write;
