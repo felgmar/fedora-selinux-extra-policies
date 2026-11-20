@@ -2,12 +2,20 @@
 module rpc-virtstorage 1.0;
 
 require {
+	type user_home_t;
 	type virtstoraged_t;
 	type unlabeled_t;
-	class dir { add_name write };
-	class file { create write };
+	class dir { add_name create remove_name setattr write };
+	class file { create unlink write };
 }
 
 #============= virtstoraged_t ==============
+
+#!!!! This avc is allowed in the current policy
 allow virtstoraged_t unlabeled_t:dir { add_name write };
+allow virtstoraged_t unlabeled_t:dir { create setattr };
+
+#!!!! This avc is allowed in the current policy
 allow virtstoraged_t unlabeled_t:file { create write };
+allow virtstoraged_t user_home_t:dir { remove_name write };
+allow virtstoraged_t user_home_t:file unlink;
