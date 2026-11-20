@@ -1,11 +1,15 @@
 
-module rpc-virtqemud 1.0;
+module rpc-virtqemud 1.1;
 
 require {
 	type unlabeled_t;
 	type virtqemud_t;
+	type svirt_home_t;
 	class file { relabelfrom relabelto setattr write };
 }
 
 #============= virtqemud_t ==============
+allow virtqemud_t svirt_home_t:file { relabelfrom relabelto setattr write };
+
+#!!!! This avc is allowed in the current policy
 allow virtqemud_t unlabeled_t:file { relabelfrom relabelto setattr write };
