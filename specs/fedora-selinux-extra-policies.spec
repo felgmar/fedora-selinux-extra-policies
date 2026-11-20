@@ -1,5 +1,5 @@
 Name:           fedora-selinux-extra-policies
-Version:        1.1.1
+Version:        1.1.2
 Release:        1%{?dist}
 Summary:        Custom SELinux policies to fix hardware and software issues.
 License:        Public Domain

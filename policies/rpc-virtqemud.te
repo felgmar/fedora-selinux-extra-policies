@@ -1,0 +1,11 @@
+
+module rpc-virtqemud 1.0;
+
+require {
+	type unlabeled_t;
+	type virtqemud_t;
+	class file { relabelfrom relabelto setattr write };
+}
+
+#============= virtqemud_t ==============
+allow virtqemud_t unlabeled_t:file { relabelfrom relabelto setattr write };
